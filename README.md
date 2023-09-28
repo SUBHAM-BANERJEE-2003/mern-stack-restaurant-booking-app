@@ -11,8 +11,14 @@ for frontend
 
 proj-directory/frontend> npm run dev
 
+vite runs the frontend server in react's default port http://localhost:5173
+
 for backend
 
 proj-directory/backend> npm run dev  
+
+nodemon run the backend server in http://localhost:3000
+
+note: we can change the port in backend server by changing express's port argument
 
 make sure you include your own .env file in the backend server to keep the secrets like your MONGODB_URI and SESSION_PASS. i have not included it because of security purpose.
