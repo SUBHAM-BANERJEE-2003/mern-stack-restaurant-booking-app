@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { useUserContext } from '../Usercontext';
 function BookForm() {
-  const username = localStorage.getItem('username');
+  const {username} = useUserContext();
   const [selectedDate, setSelectedDate] = useState('');
   const [availableTimeSlots, setAvailableTimeSlots] = useState([
     '2 PM', '3 PM', '4 PM', '5 PM', '6 PM', '7 PM', '8 PM', '9 PM', '10 PM', '11 PM'
@@ -33,9 +35,9 @@ function BookForm() {
       setSelectedDate('');
     }
   };
-
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
+      username ? (
+        <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <div className="bg-white p-8 rounded shadow-md w-full sm:w-96">
         <h2 className="text-2xl font-semibold text-center text-gray-800 mb-6">Book your slot now</h2>
         <form>
@@ -76,7 +78,16 @@ function BookForm() {
         </form>
       </div>
     </div>
-  );
+      ) : (
+        <div className="min-h-screen flex items-center justify-center">
+        <Link to="/login">
+          <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full w-full">
+            Please Login to Continue
+          </button>
+        </Link>
+    </div>
+      )
+    );
 }
 
 export default BookForm;

@@ -12,11 +12,15 @@ import BookSlot from '../pages/BookSlot.jsx'
 import MenuPage from '../pages/MenuPage.jsx'
 import ReservationPage from '../pages/ReservationPage.jsx'
 import Createaccount from '../pages/Createaccount.jsx'
-
+import { UserProvider } from './Usercontext.jsx' 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <App/>,
+    element: (
+      <UserProvider>
+        <App />
+      </UserProvider>
+    ),
   },
   {
     path: '/login',
@@ -24,19 +28,36 @@ const router = createBrowserRouter([
   },
   {
     path: '/about',
-    element: <AboutPage/>
+    element:(
+      <UserProvider>
+        <AboutPage/>
+      </UserProvider>
+    ),
+    
   },
   {
     path: '/bookslot',
-    element: <BookSlot/>
+    element:(
+      <UserProvider>
+        <BookSlot/>
+      </UserProvider>
+    ),
   },
   {
     path: '/menu',
-    element: <MenuPage/>
+    element:(
+      <UserProvider>
+        <MenuPage/>
+      </UserProvider>
+    ),
   },
   {
     path: '/reservation',
-    element: <ReservationPage/>
+    element:(
+      <UserProvider>
+        <ReservationPage/>
+      </UserProvider>
+    ),
   },
   {
     path: '/signup',
