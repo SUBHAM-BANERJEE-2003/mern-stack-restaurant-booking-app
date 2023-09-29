@@ -13,6 +13,7 @@ import MenuPage from '../pages/MenuPage.jsx'
 import ReservationPage from '../pages/ReservationPage.jsx'
 import Createaccount from '../pages/Createaccount.jsx'
 import { UserProvider } from './Usercontext.jsx' 
+import UserProfile from '../src/components/UserProfile.jsx'
 const router = createBrowserRouter([
   {
     path: '/',
@@ -62,6 +63,14 @@ const router = createBrowserRouter([
   {
     path: '/signup',
     element: <Createaccount/>
+  },
+  {
+    path: '/userprofile',
+    element:(
+      <UserProvider>
+        <UserProfile/>
+      </UserProvider>
+    ),
   }
 ])
 
