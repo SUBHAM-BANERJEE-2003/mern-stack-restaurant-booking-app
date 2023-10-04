@@ -12,3 +12,4 @@ TODOS-
 2) make an icon with a default user pic on the left of your username
 3) make the username section as a hoverable dropdown that shows had options like profile and logout.
 4) add a notification icon on the right of you profile section, to show all notification. implement a red dot counter on it based on the number of notifications.
+5) Create Admin type User and nake admin panel. Remember, only admin can access this page
