@@ -14,7 +14,18 @@ export default function Navbar() {
     window.location.reload();
   };
   return (
-    <nav className="navbar flex items-center justify-between" style={{ backgroundColor: 'white',opacity: '0.7', opzIndex: 100, fontFamily: 'Oxygen', fontWeight: 'bold' }}>
+    <>
+    <div style={{ height: '60px' }}></div>
+    <nav className="navbar flex items-center justify-between" style={{
+       backgroundColor: 'white',
+       opacity: '0.7', 
+       zIndex: 1000, 
+       fontFamily: 'Oxygen', 
+       fontWeight: 'bold',
+       position: 'fixed', // Make the navbar fixed
+       top: 0, // Stick it to the top of the page
+       width: '100%', // Make it full-width
+      }}>
       <div className='logo ml-3 mt-3 w-12 h-12 flex items-center'>
         <img src={logo} alt="mylogo" />
         <Link to='/'><span className='heading ml-2 items-start'>DAILYCIOUS</span></Link>
@@ -70,5 +81,6 @@ export default function Navbar() {
         </div>
       </div>
     </nav>
+    </>
   );
 }
