@@ -14,12 +14,17 @@ import ReservationPage from '../pages/ReservationPage.jsx'
 import Createaccount from '../pages/Createaccount.jsx'
 import { UserProvider } from './Usercontext.jsx' 
 import UserProfile from '../src/components/UserProfile.jsx'
+import background from '../public/background.jpg';
 const router = createBrowserRouter([
   {
     path: '/',
     element: (
       <UserProvider>
-        <App />
+        <div style={{
+          backgroundImage: `url(${background})`,
+          backgroundSize: "cover",
+          opacity: 0.8,
+        }}><App /></div>
       </UserProvider>
     ),
   },

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 function Featurecards({ title, imgpath, description, pathto, linktext }) {
   return (
-    <div className='feature-card border border-solid border-gray-400 rounded-sm h-[35rem] w-[20rem] mt-28 ml-10'>
+    <div className='feature-card border border-solid bg-white border-gray-400 rounded-sm h-[35rem] w-[20rem] mt-28 ml-10'>
       <h1 className='card-title flex items-center justify-center' style={{ fontFamily: 'Oxygen', fontWeight: 'bold', padding: '20px' }}>
         {title}
       </h1>

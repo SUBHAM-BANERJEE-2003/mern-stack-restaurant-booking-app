@@ -4,14 +4,17 @@ import { Link } from "react-router-dom";
 import { useUserContext } from '../Usercontext';
 
 export default function Navbar() {
-  const { username } = useUserContext();
+  let { username } = useUserContext();
+  if (username && username.length > 6) {
+    username = username.slice(0, 6) + '...';
+  }
   const handleLogout = () => {
     localStorage.removeItem('token');
     localStorage.removeItem('username');
     window.location.reload();
   };
   return (
-    <nav className="navbar flex items-center justify-between" style={{ zIndex: 100, fontFamily: 'Oxygen', fontWeight: 'bold' }}>
+    <nav className="navbar flex items-center justify-between" style={{ backgroundColor: 'white',opacity: '0.7', opzIndex: 100, fontFamily: 'Oxygen', fontWeight: 'bold' }}>
       <div className='logo ml-3 mt-3 w-12 h-12 flex items-center'>
         <img src={logo} alt="mylogo" />
         <Link to='/'><span className='heading ml-2 items-start'>DAILYCIOUS</span></Link>
@@ -36,7 +39,20 @@ export default function Navbar() {
       <div className='loginprof ml-1 mt-3 w-60 h-12 flex items-center'>
         <div className='loginprof ml-1 mt-3 w-60 h-12 flex items-center'>
           {username ? (
-            <span className='mr-5'>Welcome, {username}!</span>
+            <>
+              <div className='w-[26] relative'>
+                <span className="inline-block h-4 w-4 md:h-10 md:w-10 mr-5 overflow-hidden rounded-full">
+                  <img
+                    className="object-cover h-full w-full"
+                    src="https://th.bing.com/th/id/OIP.0H2FBvCT-goHME7xb5eWEQHaHa?pid=ImgDet&rs=1"
+                    alt="profilepic"
+                  />
+                </span>
+              </div>
+
+
+              <span className='mr-5'>Welcome, {username}!</span>
+            </>
           ) : (
             <>
               <Link to='/login'>

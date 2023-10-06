@@ -14,6 +14,7 @@ function App() {
   const resdet = "We offer one of the facilities to our customers in terms of ease. Booking a table in our resturant is super easy.You can check whether any slots are open or not by checking out our reservation list. Check now..."
   return (
     <>
+      
       <Navbar/>
       <HeroSection/>
       <div className="flex">

@@ -9,48 +9,56 @@ const combinedCardData = [
         imgpath: 'pizza.jpg',
         description: 'Delicious Italian Pizza with Oregano, Chicken Bits and Mushrooms with mozzarella cheese',
         price: 999,
+        category: ['Italian', 'snacks'],
     },
     {
         foodname: 'Burger',
         imgpath: 'burger.jpg',
         description: 'Delicious chicken value burgers - at a deal price',
         price: 248,
+        category: ['American'],
     },
     {
         foodname: 'Biryani',
         imgpath: 'biryani.jpg',
         description: 'Delicious Indian Chicken Biryani with a boiled egg at a very affordable price',
         price: 299,
+        category: ['Indian'],
     },
     {
         foodname: 'Chinese Chicken Hakka noodles',
         imgpath: 'hakkanoodles.jpg',
         description: 'Sizzling delicious hot Chinese style chicken hakka noodles',
         price: 99,
+        category: ['Chinese'],
     },
     {
         foodname: 'English Breakfast',
         imgpath: 'engbreakfast.jpg',
         description: 'A perfect start of the day with English style breakfast with salad, bread, boiled eggs, beans, and tea',
         price: 169,
+        category: ['English'],
     },
     {
         foodname: 'Chicken Barbecue',
         imgpath: 'barbecue.jpg',
         description: 'Delicious chicken barbecue, sizzling hot',
         price: 399,
+        category: ['Barbecue'],
     },
     {
         foodname: 'Butter Onion Masala Dosa',
         imgpath: 'dosa.jpg',
         description: 'Delicious Indian Onion masala dosa with chutney at a very affordable price',
         price: 89,
+        category: ['Indian'],
     },
     {
         foodname: 'Veg Meal chapati rice',
         imgpath: 'vegmeal.jpg',
         description: 'Hot meal with vegetable meal with paneer, chapati, and rice and a plethora of other goodies',
         price: 199,
+        category: ['Indian'],
     },
 ];
 
@@ -75,6 +83,7 @@ function MenuPage() {
                                 imgpath={card.imgpath}
                                 description={card.description}
                                 price={card.price}
+                                category={card.category}
                             />
                         ))}
                     </div>
