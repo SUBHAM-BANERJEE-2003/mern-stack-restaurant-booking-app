@@ -7,7 +7,6 @@ import { AiOutlineHome } from "react-icons/ai";
 import { BsHouse } from 'react-icons/bs';
 import { GiHamburgerMenu } from "react-icons/gi";
 import { GiFastNoodles } from 'react-icons/gi';
-import { BsShare } from "react-icons/bs";
 import { BsBookmarkCheckFill } from 'react-icons/bs';
 import { AiOutlineLogin } from 'react-icons/ai';
 import { AiOutlineLogout } from 'react-icons/ai';
