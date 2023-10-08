@@ -21,8 +21,13 @@ const router = createBrowserRouter([
     element: (
       <UserProvider>
         <div style={{
+          display: "block",
           backgroundImage: `url(${background})`,
           backgroundSize: "cover",
+          position: "relative",
+          WebkitBackgroundSize: "cover",
+          MozBackgroundSize: "cover",
+          OBackgroundSize: "cover",
           opacity: 0.8,
         }}><App /></div>
       </UserProvider>
