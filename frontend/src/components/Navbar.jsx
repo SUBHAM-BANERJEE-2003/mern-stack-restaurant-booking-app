@@ -95,14 +95,14 @@ export default function Navbar() {
     <>
       <nav className="flex  w-full items-center justify-between px-6 h-16 bg-white text-gray-700 border-b border-gray-200 z-10">
         <div className="flex items-center">
-          <button className="mr-2" aria-label="Open Menu" onClick={handleDrawer}>
+          <button className="sm:hidden mr-2" aria-label="Open Menu" onClick={handleDrawer}>
             <GiHamburgerMenu className="text-3xl" />
           </button>
 
           <img
             src={logo}
             alt="Logo"
-            className="h-auto w-10"
+            className="margin-auto block sm:h-auto w-10"
           /> <p className='font-extrabold text-lg ml-2' style={{ fontFamily: 'Oxygen' }}>Dailycious</p>
         </div>
 
