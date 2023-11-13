@@ -1,6 +1,7 @@
 import React from 'react';
 import logo from '../assets/mylogo.jpg';
 import { Link } from 'react-router-dom';
+
 import { useUserContext } from '../Usercontext';
 import { useEffect, useState } from "react";
 import { AiOutlineHome } from "react-icons/ai";
@@ -91,6 +92,8 @@ export default function Navbar() {
       document.removeEventListener("keydown", handleEscKeyPress);
     };
   }, [isOpen]);
+
+
   return (
     <>
       <nav className="flex  w-full items-center justify-between px-6 h-16 bg-white text-gray-700 border-b border-gray-200 z-10">

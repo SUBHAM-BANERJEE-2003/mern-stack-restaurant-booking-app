@@ -1,5 +1,5 @@
 import React from 'react';
-import Navbar from './navbar';
+import Navbar from './Navbar';
 import Footer from './Footer';
 import { useUserContext } from '../Usercontext';
 import {Link} from "react-router-dom";

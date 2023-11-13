@@ -37,11 +37,9 @@ function LoginForm() {
 
         // Save the token to local storage
         localStorage.setItem('token', token);
-
-        console.log('Token received:', token);
         navigate('/');
+        window.location.reload();
       } else {
-        console.error('Data was not received');
         return false;
       }
     } catch (error) {
