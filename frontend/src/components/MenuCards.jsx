@@ -1,4 +1,3 @@
-import React from 'react';
 
 function Menucards({ foodname, imgpath, description, price, category }) {
   return (

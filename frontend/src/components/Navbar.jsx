@@ -1,16 +1,12 @@
-import React from 'react';
-import logo from '../assets/mylogo.jpg';
-import { Link } from 'react-router-dom';
 
-import { useUserContext } from '../Usercontext';
 import { useEffect, useState } from "react";
-import { AiOutlineHome } from "react-icons/ai";
-import { BsHouse } from 'react-icons/bs';
-import { GiHamburgerMenu } from "react-icons/gi";
-import { GiFastNoodles } from 'react-icons/gi';
-import { BsBookmarkCheckFill } from 'react-icons/bs';
-import { AiOutlineLogin } from 'react-icons/ai';
-import { AiOutlineLogout } from 'react-icons/ai';
+import { AiOutlineHome, AiOutlineLogin, AiOutlineLogout } from "react-icons/ai";
+import { BsBookmarkCheckFill, BsHouse } from 'react-icons/bs';
+import { FaLocationArrow, FaMapMarkerAlt } from 'react-icons/fa';
+import { GiFastNoodles, GiHamburgerMenu } from "react-icons/gi";
+import { Link } from 'react-router-dom';
+import { useUserContext } from '../Usercontext';
+import logo from '../assets/mylogo.jpg';
 export default function Navbar() {
   let { username } = useUserContext();
 
@@ -105,9 +101,30 @@ export default function Navbar() {
           <img
             src={logo}
             alt="Logo"
-            className="margin-auto block sm:h-auto w-10"
-          /> <p className='font-extrabold text-lg ml-2' style={{ fontFamily: 'Oxygen' }}>Dailycious</p>
+            className="block sm:h-auto w-10 ml-28"
+          /> <p className='ml-2 font-extrabold text-xl' style={{ fontFamily: 'Oxygen' }}>Dailycious</p>
+          <span><div className="border border-gray-300 h-8 ml-5"></div></span></div>
+
+        <div className="relative inline-block mr-72">
+          <select
+            name="location"
+            id="location"
+            className="appearance-none bg-white border border-gray-300 text-gray-700 py-2 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+          >
+            <option value="" disabled selected>
+              Setup your current Location
+            </option>
+            <option
+              value="gps"
+            >
+              <FaLocationArrow className="inline-block mr-2" /> Use GPS
+            </option>
+          </select>
+          <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+            <FaMapMarkerAlt />
+          </div>
         </div>
+
 
         <div className="flex items-center">
           <div className="hidden md:flex md:justify-between md:bg-transparent">

@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 
 function LoginForm() {
   const navigate = useNavigate();
@@ -58,7 +58,7 @@ function LoginForm() {
         <h2 className="text-2xl font-semibold text-center text-gray-800 mb-6">Login</h2>
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
-             {emailError && <p className="text-red-600 text-sm">{emailError}</p>}
+            {emailError && <p className="text-red-600 text-sm">{emailError}</p>}
             <label htmlFor="email" className="block text-gray-600 font-semibold">Email<span className='text-red-600'>*</span></label>
             <input
               type="email"
@@ -72,7 +72,7 @@ function LoginForm() {
             />
           </div>
           <div className="mb-4">
-          {passwordError && <p className="text-red-600 text-sm">{passwordError}</p>}
+            {passwordError && <p className="text-red-600 text-sm">{passwordError}</p>}
             <label htmlFor="password" className="block text-gray-600 font-semibold">Password<span className='text-red-600'>*</span></label>
             <input
               type="password"
@@ -92,7 +92,7 @@ function LoginForm() {
             >
               Log In
             </button>
-            <Link to='/signup'><p className='mt-10 text-blue-500'>Don't have an account?Create One</p></Link>
+            <Link to='/signup'><p className='mt-10 text-blue-500'>Dont have an account?Create One</p></Link>
           </div>
         </form>
       </div>
