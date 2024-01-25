@@ -1,8 +1,8 @@
 import { useRef } from "react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import SliderCards from "./SliderCards";
-const list = ['biryani', 'biryani', 'biryani', 'biryani', 'biryani', 'biryani', 'biryani', 'biryani', 'biryani', 'biryani', 'biryani', 'biryani', 'biryani', 'biryani']
-
+const list = ['Biryani', 'Cake', 'Dosa', 'Noodles', 'Barbeque', 'Burger', 'Veg Thali', 'Sandwitch', 'Snacks']
+const photolist = ['biryani.png', 'cakes.webp', 'dosa.jpeg', 'noodles.jpg', 'barbecue.png', 'burger.png', 'vegthali.png', 'sandwitch.jpeg', 'snacksamosa.png']
 const ScrollButtons = () => {
     const sliderRef = useRef(null);
     const scrollAmount = 100;
@@ -19,8 +19,8 @@ const ScrollButtons = () => {
             </button>
             <div className="flex max-w-[1200px] overflow-scroll scroll-smooth transition-scroll duration-300 ease-in-out" ref={sliderRef}>
                 {
-                    list.map((prod) => {
-                        return <SliderCards foodname={prod} key={prod} />;
+                    list.map((prod, index) => {
+                        return <SliderCards foodname={prod} photoname={photolist[index]} key={prod} />;
                     })
                 }
             </div>

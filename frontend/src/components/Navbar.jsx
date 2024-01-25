@@ -24,7 +24,7 @@ export default function Navbar() {
     {
       path: "/about",
       icon: <BsHouse className="text-2xl" />,
-      title: "About Us",
+      title: "About",
     },
     {
       path: "/Menu",
@@ -34,7 +34,7 @@ export default function Navbar() {
     {
       path: "/bookslot",
       icon: <BsBookmarkCheckFill className="text-2xl" />,
-      title: "Book A Slot",
+      title: "Book",
     },
   ];
 
@@ -47,7 +47,7 @@ export default function Navbar() {
     {
       path: "/about",
       icon: <BsHouse className="text-2xl" />,
-      title: "About Us",
+      title: "About",
     },
     {
       path: "/Menu",
@@ -57,7 +57,7 @@ export default function Navbar() {
     {
       path: "/bookslot",
       icon: <BsBookmarkCheckFill className="text-2xl" />,
-      title: "Book A Slot",
+      title: "Book",
     },
   ];
 
@@ -101,15 +101,15 @@ export default function Navbar() {
           <img
             src={logo}
             alt="Logo"
-            className="block sm:h-auto w-10 ml-28"
+            className="block sm:h-auto w-10 ml-10"
           /> <p className='ml-2 font-extrabold text-xl' style={{ fontFamily: 'Oxygen' }}>Dailycious</p>
           <span><div className="border border-gray-300 h-8 ml-5"></div></span></div>
 
-        <div className="relative inline-block mr-72">
+        <div className=" -ml-[140px]">
           <select
             name="location"
             id="location"
-            className="appearance-none bg-white border border-gray-300 text-gray-700 py-2 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+            className="mt-4 appearance-none bg-white border border-gray-300 text-gray-700 py-2 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
           >
             <option value="" disabled selected>
               Setup your current Location
@@ -120,7 +120,7 @@ export default function Navbar() {
               <FaLocationArrow className="inline-block mr-2" /> Use GPS
             </option>
           </select>
-          <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+          <div className="relative pointer-events-none inset-y-0 -top-[1.7rem] right-0 flex flex-row-reverse items-center px-2 text-gray-700">
             <FaMapMarkerAlt />
           </div>
         </div>
@@ -131,8 +131,8 @@ export default function Navbar() {
             {navList.map(({ path, icon, title }, index) => (
               <Link to={path} key={index}>
                 <button
-                  title="Wishlist"
-                  className="flex items-center p-3 font-medium mr-2 text-center bg-gray-300 rounded hover:bg-gray-400 focus:outline-none focus:bg-gray-400"
+                  title={`${title}`}
+                  className="flex items-center p-3 font-medium mr-5 text-center bg-gray-300 rounded hover:bg-gray-400 focus:outline-none focus:bg-gray-400"
                 >
                   <span>{icon}</span>
                   <span>{title}</span>
@@ -141,7 +141,7 @@ export default function Navbar() {
             ))}
             {username ? (
               <>
-                <div className="h-10 relative w-10 overflow-hidden rounded-full">
+                <div className="h-10 w-10 overflow-hidden rounded-full">
                   <img
                     className="object-cover h-full w-full rounded-full"
                     src="https://th.bing.com/th/id/OIP.0H2FBvCT-goHME7xb5eWEQHaHa?pid=ImgDet&rs=1"
@@ -153,7 +153,7 @@ export default function Navbar() {
                 </span>
                 <button
                   onClick={handleLogout}
-                  className="flex items-center p-3 font-medium mr-2 text-center bg-gray-300 rounded hover:bg-gray-400 focus:outline-none focus:bg-gray-400"
+                  className="flex w-40 h-12 items-center p-3 font-medium mr-2 text-center bg-gray-300 rounded hover:bg-gray-400 focus:outline-none focus:bg-gray-400"
                 > <span><AiOutlineLogout className='text-2xl' /></span>
                   Logout
                 </button>
