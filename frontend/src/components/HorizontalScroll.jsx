@@ -13,7 +13,7 @@ const ScrollButtons = () => {
                 className="nav-btn mr-10"
                 onClick={() => {
                     const container = sliderRef.current;
-                    container.scrollLeft -= scrollAmount; // Scroll left by the specified amount
+                    container.scrollLeft -= scrollAmount;
                 }} >
                 <FaChevronLeft />
             </button>
@@ -28,7 +28,7 @@ const ScrollButtons = () => {
                 className="nav-btn ml-10"
                 onClick={() => {
                     const container = sliderRef.current;
-                    container.scrollLeft += scrollAmount; // Scroll right by the specified amount
+                    container.scrollLeft += scrollAmount;
                 }}
             >
                 <FaChevronRight />

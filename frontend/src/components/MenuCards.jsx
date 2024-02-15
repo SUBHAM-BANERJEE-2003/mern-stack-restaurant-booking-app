@@ -1,5 +1,10 @@
 
 function Menucards({ foodname, imgpath, description, price, category }) {
+  console.log('foodname:', foodname);
+  console.log('imgpath:', imgpath);
+  console.log('description:', description);
+  console.log('price:', price);
+  console.log('category:', category);
   return (
     <div className='feature-card border border-solid border-gray-400 rounded-sm w-[20rem] ml-10'>
       <h1 className='card-title flex items-center justify-center' style={{ fontFamily: 'Oxygen', fontWeight: 'bold', padding: '20px' }}>

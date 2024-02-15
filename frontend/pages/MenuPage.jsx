@@ -1,108 +1,91 @@
-
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 import Footer from '../src/components/Footer';
-import MenuCards from '../src/components/MenuCards';
 import Navbar from '../src/components/Navbar';
-
-const combinedCardData = [
-    {
-        foodname: 'Pizza',
-        imgpath: 'pizza.jpg',
-        description: 'Delicious Italian Pizza with Oregano, Chicken Bits and Mushrooms with mozzarella cheese',
-        price: 999,
-        category: ['Italian', 'snacks'],
-    },
-    {
-        foodname: 'Burger',
-        imgpath: 'burger.jpg',
-        description: 'Delicious chicken value burgers - at a deal price',
-        price: 248,
-        category: ['American'],
-    },
-    {
-        foodname: 'Biryani',
-        imgpath: 'biryani.jpg',
-        description: 'Delicious Indian Chicken Biryani with a boiled egg at a very affordable price',
-        price: 299,
-        category: ['Indian'],
-    },
-    {
-        foodname: 'Chinese Chicken Hakka noodles',
-        imgpath: 'hakkanoodles.jpg',
-        description: 'Sizzling delicious hot Chinese style chicken hakka noodles',
-        price: 99,
-        category: ['Chinese'],
-    },
-    {
-        foodname: 'English Breakfast',
-        imgpath: 'engbreakfast.jpg',
-        description: 'A perfect start of the day with English style breakfast with salad, bread, boiled eggs, beans, and tea',
-        price: 169,
-        category: ['English'],
-    },
-    {
-        foodname: 'Chicken Barbecue',
-        imgpath: 'barbecue.jpg',
-        description: 'Delicious chicken barbecue, sizzling hot',
-        price: 399,
-        category: ['Barbecue'],
-    },
-    {
-        foodname: 'Butter Onion Masala Dosa',
-        imgpath: 'dosa.jpg',
-        description: 'Delicious Indian Onion masala dosa with chutney at a very affordable price',
-        price: 89,
-        category: ['Indian'],
-    },
-    {
-        foodname: 'Veg Meal chapati rice',
-        imgpath: 'vegmeal.jpg',
-        description: 'Hot meal with vegetable meal with paneer, chapati, and rice and a plethora of other goodies',
-        price: 199,
-        category: ['Indian'],
-    },
-];
+import Loadingpage from './Loadingpage';
 
 function MenuPage() {
-    // Chunk the combined data array into groups of four
-    const chunkedData = [];
-    for (let i = 0; i < combinedCardData.length; i += 4) {
-        chunkedData.push(combinedCardData.slice(i, i + 4));
+    const [menuData, setMenuData] = useState([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const fetchMenuData = async () => {
+            try {
+                const response = await axios.get('http://localhost:3000/getmenu');
+                setMenuData(response.data);
+                setLoading(false);
+            } catch (error) {
+                console.error('Error fetching menu data:', error);
+                setLoading(false);
+            }
+        };
+
+        fetchMenuData();
+    }, []);
+
+    if (loading) {
+        return (
+            <Loadingpage />
+        )
+    }
+
+    if (menuData.length === 0) {
+        return (
+            <>
+                <Navbar />
+                <div
+                    style={{
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        height: "100vh",
+                    }}
+                >
+                    <div className="flex items-center justify-center text-blue-700 m-5" style={{ fontSize: '25px', fontFamily: 'Oxygen', fontWeight: 'bolder', padding: '20px' }}>
+                        No Menu Items Found
+                    </div></div>
+                <Footer />
+            </>
+        )
     }
 
     return (
         <>
             <Navbar />
-            <h1 className='mt-5 flex items-center justify-center text-blue-700' style={{ fontSize: '25px', fontFamily: 'Oxygen', fontWeight: 'bolder' }}>Check Our Menu</h1>
-            {chunkedData.map((chunk, index) => (
-                <div key={index} className="grid grid-cols-4 gap-4">
-                    <div className="container flex mt-3 mx-auto">
-                        {chunk.map((card, cardIndex) => (
-                            <MenuCards
-                                key={cardIndex}
-                                foodname={card.foodname}
-                                imgpath={card.imgpath}
-                                description={card.description}
-                                price={card.price}
-                                category={card.category}
-                            />
-                        ))}
+            <div className="mt-5 flex items-center justify-center text-blue-700 m-5" style={{ fontSize: '25px', fontFamily: 'Oxygen', fontWeight: 'bolder', padding: '20px' }}>
+                Check Our Menu
+            </div>
+            <div className="flex flex-row gap-10 flex-wrap">
+                {menuData.map((item, index) => (
+                    <div key={index} className="card card-compact shadow-xl col-span-1 w-60 md:w-72 lg:w-96 h-fit bg-gray-100 hover:bg-base-200 rounded" style={{ margin: '20px' }}>
+                        <div className="relative">
+                            <img src={`/MenuItems/${item.imgpath}`} alt={item.foodname} className="w-full h-full object-cover" />
+                        </div>
+                        <div className="card-body">
+                            <div className="card-title font-bold text-xl mb-2">{item.foodname}</div>
+                            <div className='card-desc items-center justify-center' style={{ fontFamily: 'Oxygen', fontWeight: 'bold', padding: '20px' }}>
+                                <p>{item.description}</p>
+                                <p><b>Price:</b>
+                                    <span className='text-orange-600'> ₹{item.price}</span></p>
+                                <span>
+                                    <p className="font-semibold">Categories:</p>
+                                    <div className="flex flex-wrap gap-1">
+                                        {item.Category.map((categoryItem, categoryIndex) => (
+                                            <span key={categoryIndex} className="bg-gray-200 border border-solid border-gray-400 rounded-sm px-2 py-1">
+                                                {categoryItem}
+                                            </span>
+                                        ))}
+                                    </div>
+                                </span>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            ))}
+                ))}
+            </div>
+
             <Footer />
         </>
     );
 }
 
 export default MenuPage;
-
-
-{/** This is how we split an array in 4 4 parts
-const array = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'];
-const chunkSize = 4;
-const result = [];
-for (let i = 0; i < array.length; i += chunkSize) {
-  result.push(array.slice(i, i + chunkSize));
-}
-console.log(result); */
-}

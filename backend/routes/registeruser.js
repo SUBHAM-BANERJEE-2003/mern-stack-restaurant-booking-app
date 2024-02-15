@@ -1,9 +1,8 @@
 const express = require("express");
-const user = require('../utils/usertodb') ;
+const user = require('../utils/usertodb');
 const authenticateUser = require('../utils/authuser');
 const recordRoutes = express.Router();
-const { generateToken,verifyToken} = require('../utils/jwt'); // Import your JWT functions
-
+const { generateToken, verifyToken } = require('../utils/jwt');
 recordRoutes.route("/register").post(async function (req, res) {
   const username = req.body.username;
   const email = req.body.email;
@@ -13,16 +12,16 @@ recordRoutes.route("/register").post(async function (req, res) {
   const existingUserByEmail = await user.getUserByEmail(email);
 
   if (existingUserByUsername || existingUserByEmail) {
-      return res.status(400).json({ success: false, message: 'Username or Email already exists' });
+    return res.status(400).json({ success: false, message: 'Username or Email already exists' });
   }
-  else{
-    user.addUser(username,email,password,age);
+  else {
+    user.addUser(username, email, password, age);
     res.json({ message: 'Data received successfully' });
   }
 });
 
 recordRoutes.get('/loginserver', (req, res) => {
-    res.send('This is login page');
+  res.send('This is login page');
 });
 
 recordRoutes.route("/loginserver").post(async function (req, res) {

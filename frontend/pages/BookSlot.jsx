@@ -1,13 +1,12 @@
-import React from 'react'
+import BookForm from '../src/components/BookForm';
 import Footer from '../src/components/Footer';
 import Navbar from '../src/components/Navbar';
-import BookForm from '../src/components/BookForm'
 function BookSlot() {
   return (
     <>
-    <Navbar/>
-    <BookForm/>
-    <Footer/>
+      <Navbar />
+      <BookForm />
+      <Footer />
     </>
   )
 }
