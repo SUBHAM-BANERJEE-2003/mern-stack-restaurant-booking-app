@@ -1,7 +1,6 @@
 const mongoose = require('../db/conn');
 const User = require("../db/schemas/User");
 
-
 async function addUser(name, email, password, age) {
     try {
         const user = await User.create({
@@ -10,17 +9,17 @@ async function addUser(name, email, password, age) {
             password: password,
             age: age
         });
-        console.log('User created:', user);
+        console.log('User created');
     } catch (e) {
         console.error('Error creating user:', e.message);
     }
 }
 
-async function getUserByEmail( email) {
+async function getUserByEmail(email) {
     try {
         const user = await User.findOne({ email });
         if (user) {
-            console.log('User already exists:', user);
+            console.log('User already exists');
             return user; // Return the user object if found
         } else {
             console.log('User not found');
@@ -32,11 +31,11 @@ async function getUserByEmail( email) {
     }
 }
 
-async function getUserByUsername(username) {
+async function getUserByUsername(name) {
     try {
-        const user = await User.findOne({ username });
+        const user = await User.findOne({ name });
         if (user) {
-            console.log('User already exists:', user);
+            console.log('User already exists',);
             return user; // Return the user object if found
         } else {
             console.log('User not found');
@@ -48,21 +47,22 @@ async function getUserByUsername(username) {
     }
 }
 
-async function findUserByEmailAndPassword(email, password) {
+async function findUserByEmail(email) {
     try {
-        const user = await User.findOne({ email, password });
+        const user = await User.findOne({ email });
         if (user) {
-            console.log('User found by email and password:', user);
+            console.log('User found by email');
             return user; // Return the user object if found
         } else {
-            console.log('User not found by email and password');
+            console.log('User not found by email');
             return null; // Return null if not found
         }
     } catch (e) {
-        console.error('Error finding user by email and password:', e.message);
+        console.error('Error finding user by email:', e.message);
         return null;
     }
 }
+
 
 async function deleteUserByName(name) {
     try {
@@ -80,7 +80,7 @@ async function deleteUserByName(name) {
 // Export the functions so they can be used in other files
 module.exports = {
     addUser,
-    findUserByEmailAndPassword,
+    findUserByEmail,
     deleteUserByName,
     getUserByEmail,
     getUserByUsername
