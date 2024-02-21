@@ -6,9 +6,11 @@ import {
 } from "react-router-dom"
 import AboutPage from '../pages/AboutPage.jsx'
 import BookSlot from '../pages/BookSlot.jsx'
+import CheckConnection from '../pages/CheckConnection.jsx'
 import Createaccount from '../pages/Createaccount.jsx'
 import Login from '../pages/Login.jsx'
 import MenuPage from '../pages/MenuPage.jsx'
+import NotFound from '../pages/NotFound.jsx'
 import OrderFood from '../pages/OrderFood.jsx'
 import ReservationPage from '../pages/ReservationPage.jsx'
 import UserProfile from '../src/components/UserProfile.jsx'
@@ -79,17 +81,27 @@ const router = createBrowserRouter([
     ),
   },
   {
-    path: '/foodorder',
+    path: '/foodorder/:id',
     element: (
       <UserProvider>
         <OrderFood />
       </UserProvider>
     ),
   },
+  {
+    path: '*',
+    element: (
+      <UserProvider>
+        <NotFound />
+      </UserProvider>
+    )
+  },
 ])
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <CheckConnection>
+      <RouterProvider router={router} />
+    </CheckConnection>
   </React.StrictMode>,
 )

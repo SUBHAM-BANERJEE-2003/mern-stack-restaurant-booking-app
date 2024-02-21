@@ -31,6 +31,22 @@ app.get('/getmenu', async (req, res) => {
     res.status(500).json({ error: 'Internal server error' });
   }
 });
+app.get('/getmenubyid/:id', async (req, res) => {
+  const foodId = req.params.id;
+  try {
+    const menuData = await Food.findOne({ foodId });
+    if (menuData) {
+      res.json(menuData);
+      console.log(menuData);
+    } else {
+      console.log('Food not found');
+      res.status(404).json({ error: 'Food not found' });
+    }
+  } catch (err) {
+    console.error('Error fetching menu data:', err);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
 app.use("/", recordRoutes);
 app.listen(3000, () => {
   console.log('Connected to PORT 3000...');

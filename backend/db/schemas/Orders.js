@@ -1,34 +1,34 @@
 const mongoose = require("mongoose");
 
-const bookingSchema = mongoose.Schema({
-    registration_id: {
+const Orders = mongoose.Schema({
+    food_id: {
         type: Number,
         required: true,
         unique: true,
     },
-    name: {
+    username: {
         type: String,
         required: true,
         lowercase: true,
         unique: true,
         max: 25
     },
-    Day: {
+    paymentmode: {
         type: String,
-        required: true,
-        unique: true,
-    },
-    Timeslot: {
-        type: String,
-        required: true,
-        unique: true,
-    },
-    Datetime: {
-        type: Date,
         required: true
     },
-    Status: {
+    quantity: {
+        type: Number,
+        required: true,
+    },
+    totalamount: {
+        type: Number,
+        required: true,
+    },
+    address: {
         type: String,
         required: true,
     },
 });
+
+module.exports = mongoose.model("Orders", Orders);

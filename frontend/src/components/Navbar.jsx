@@ -105,7 +105,7 @@ export default function Navbar() {
           /> <p className='ml-2 font-extrabold text-xl' style={{ fontFamily: 'Oxygen' }}>Dailycious</p>
           <span><div className="border border-gray-300 h-8 ml-5"></div></span></div>
 
-        <div className=" -ml-[140px]">
+        <div className="hidden md:flex md:justify-between md:bg-transparent -ml-[140px]">
           <select
             name="location"
             id="location"
@@ -120,7 +120,7 @@ export default function Navbar() {
               <FaLocationArrow className="inline-block mr-2" /> Use GPS
             </option>
           </select>
-          <div className="relative pointer-events-none inset-y-0 -top-[1.7rem] right-0 flex flex-row-reverse items-center px-2 text-gray-700">
+          <div className="flex flex-row-reverse items-center px-2 py-3 text-gray-700">
             <FaMapMarkerAlt />
           </div>
         </div>
@@ -192,6 +192,23 @@ export default function Navbar() {
               className="h-auto w-12 mx-auto"
             /><p className='font-extrabold mr-10' style={{ fontFamily: 'Oxygen' }}>Dailycious</p>
           </span>
+          <select
+            name="location"
+            id="location"
+            className="mt-4 appearance-none bg-white border border-gray-300 text-gray-700 py-2 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+          >
+            <option value="" disabled selected>
+              Setup your Location
+            </option>
+            <option
+              value="gps"
+            >
+              <FaLocationArrow className="inline-block mr-2" /> Use GPS
+            </option>
+          </select>
+          <div className="flex flex-row-reverse items-center px-2 py-3 text-gray-700">
+            <FaMapMarkerAlt />
+          </div>
           {sideList.map(({ path, icon, title }, index) => {
             return (
               <Link to={path} key={index}>
