@@ -5,6 +5,7 @@ const app = express();
 const cors = require('cors');
 const cookieParser = require("cookie-parser")
 const recordRoutes = require('./routes/registeruser.js');
+const Order = require('./db/schemas/Orders.js');
 require('dotenv').config();
 
 const corsOptions = {
@@ -47,6 +48,24 @@ app.get('/getmenubyid/:id', async (req, res) => {
     res.status(500).json({ error: 'Internal server error' });
   }
 });
+app.post('/orderfood', async (req, res) => {
+  const { food_id, username, paymentmode, quantity, totalamount, address } = req.body;
+  const order = new Order({
+    food_id,
+    username,
+    paymentmode,
+    quantity,
+    totalamount,
+    address
+  });
+  try {
+    const newOrder = await order.save();
+    res.json(newOrder);
+  } catch (err) {
+    console.error('Error placing order:', err);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+})
 app.use("/", recordRoutes);
 app.listen(3000, () => {
   console.log('Connected to PORT 3000...');

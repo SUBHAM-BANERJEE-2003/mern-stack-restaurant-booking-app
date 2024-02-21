@@ -9,15 +9,17 @@ function OrderFood() {
     const params = useParams();
     const navigate = useNavigate();
     const [menuData, setMenuData] = useState([]);
+    const [finalAmount, setFinalAmount] = useState(0);
     const [formData, setFormData] = useState({
         food_id: 0,
         username: undefined,
-        paymentmode: 1,
+        paymentmode: '1', // set default payment mode
         quantity: 1,
-        totalamount: menuData.price,
+        totalamount: 0,
         address: ''
     });
-    let { username } = useUserContext();
+    const { username } = useUserContext();
+
     useEffect(() => {
         const fetchMenuData = async () => {
             try {
@@ -29,25 +31,32 @@ function OrderFood() {
         }
         fetchMenuData();
     }, [params]);
+
+    useEffect(() => {
+        setFinalAmount(menuData.price * formData.quantity);
+    }, [menuData, formData.quantity]);
+
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         let newValue = value;
         if (name === 'quantity') {
             newValue = Math.max(1, parseInt(value));
-            setFormData({ ...formData, totalamount: menuData.price * newValue });
         }
         setFormData({
             ...formData,
+            food_id: menuData.foodId,
             username: username,
-            food_id: params.id,
+            totalamount: finalAmount,
             [name]: newValue
         });
     };
+
 
     const handleOrder = async (e) => {
         e.preventDefault();
         if (username) {
             try {
+                console.log('Ordering food:', formData);
                 const response = await axios.post('http://localhost:3000/orderfood', formData, {
                     headers: {
                         'Content-Type': 'application/json'
@@ -55,6 +64,7 @@ function OrderFood() {
                 });
                 console.log('Order placed successfully');
                 console.log(response.data);
+                navigate('/thanks');
             } catch (error) {
                 console.error('Error placing order:', error);
             }
@@ -84,7 +94,7 @@ function OrderFood() {
                     <form onSubmit={handleOrder}>
                         <div className="mb-4">
                             <label htmlFor="paymentmode" className="block text-gray-600 font-semibold">Payment Mode<span className='text-red-600'>*</span></label>
-                            <select value={formData.paymentmode} onChange={handleInputChange}>
+                            <select value={formData.paymentmode} onChange={(e) => setFormData({ ...formData, paymentmode: e.target.value })}>
                                 <option value="1">Credit Card</option>
                                 <option value="2">Cash On Delivery</option>
                                 <option value="3">UPI/NETBANKING</option>

@@ -4,14 +4,11 @@ const Orders = mongoose.Schema({
     food_id: {
         type: Number,
         required: true,
-        unique: true,
     },
     username: {
         type: String,
         required: true,
         lowercase: true,
-        unique: true,
-        max: 25
     },
     paymentmode: {
         type: String,

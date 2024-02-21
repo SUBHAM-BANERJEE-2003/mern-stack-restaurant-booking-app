@@ -13,6 +13,7 @@ import MenuPage from '../pages/MenuPage.jsx'
 import NotFound from '../pages/NotFound.jsx'
 import OrderFood from '../pages/OrderFood.jsx'
 import ReservationPage from '../pages/ReservationPage.jsx'
+import SuccessOrder from '../pages/SuccessOrder.jsx'
 import UserProfile from '../src/components/UserProfile.jsx'
 import App from './App.jsx'
 import './index.css'
@@ -96,6 +97,22 @@ const router = createBrowserRouter([
       </UserProvider>
     )
   },
+  {
+    path: '/offline',
+    element: (
+      <UserProvider>
+        <CheckConnection />
+      </UserProvider>
+    )
+  },
+  {
+    path: "/thanks",
+    element: (
+      <UserProvider>
+        <SuccessOrder />
+      </UserProvider>
+    )
+  }
 ])
 
 ReactDOM.createRoot(document.getElementById('root')).render(
