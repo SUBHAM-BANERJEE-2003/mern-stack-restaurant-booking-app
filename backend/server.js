@@ -10,7 +10,7 @@ const Booking = require('./db/schemas/Booking.js');
 require('dotenv').config();
 
 const corsOptions = {
-  origin: 'http://localhost:5173',
+  origin: 'https://dailycious-app.vercel.app/',
   method: ['POST', 'GET'],
   credentials: true,
 };
