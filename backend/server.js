@@ -97,6 +97,10 @@ app.post('/booking', async (req, res) => {
       res.status(500).json({ message: "Timeslot is already booked" });
     });
 })
-
+app.get('/', (req, res) => {
+  res.send('Server Running!')
+})
 app.use("/", recordRoutes);
+
+export default app;
 
