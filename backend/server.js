@@ -11,7 +11,6 @@ require('dotenv').config();
 
 const corsOptions = {
   origin: 'https://dailycious-app.vercel.app/',
-  method: ['POST', 'GET'],
   credentials: true,
 };
 app.use(cors(corsOptions));
