@@ -1,5 +1,7 @@
 # mern-stack-restaurant-booking-app
 
+CHECK OUT MY PROJECT THAT I DEPLOYED IN VERCEL - https://dailycious-app.vercel.app/
+
 to run this file:
 
 go to frontend and backend folders and just type in npm install to install node_modules folder.
