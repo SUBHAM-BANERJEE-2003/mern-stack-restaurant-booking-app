@@ -17,7 +17,8 @@ for backend
 
 proj-directory/backend> npm run dev  
 
-nodemon run the backend server in http://localhost:3000
+nodemon run the backend server in https://dailycious-mernstack-api.vercel.app
+
 
 note: we can change the port in backend server by changing express's port argument
 

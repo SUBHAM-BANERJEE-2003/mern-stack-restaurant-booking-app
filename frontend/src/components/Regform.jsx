@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
 import axios from 'axios';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 function RegForm() {
@@ -16,16 +16,16 @@ function RegForm() {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
-  
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:3000/register', formData, {
+      const response = await axios.post('https://dailycious-mernstack-api.vercel.app/register', formData, {
         headers: {
           'Content-Type': 'application/json',
         },
       });
-      console.log('response from server',response);
+      console.log('response from server', response);
       if (response.status === 200) {
         console.log('User registered successfully');
         navigate('/login');

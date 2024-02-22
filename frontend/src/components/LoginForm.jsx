@@ -23,7 +23,7 @@ function LoginForm() {
 
     try {
       const response = await axios.post(
-        'http://localhost:3000/loginserver',
+        'https://dailycious-mernstack-api.vercel.app/loginserver',
         formData,
         {
           headers: {

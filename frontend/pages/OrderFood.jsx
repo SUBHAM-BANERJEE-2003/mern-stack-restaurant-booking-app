@@ -23,7 +23,7 @@ function OrderFood() {
     useEffect(() => {
         const fetchMenuData = async () => {
             try {
-                const response = await axios.get(`http://localhost:3000/getmenubyid/${params.id}`);
+                const response = await axios.get(`https://dailycious-mernstack-api.vercel.app/getmenubyid/${params.id}`);
                 setMenuData(response.data);
             } catch (error) {
                 console.error('Error fetching menu data:', error);
@@ -57,7 +57,7 @@ function OrderFood() {
         if (username) {
             try {
                 console.log('Ordering food:', formData);
-                const response = await axios.post('http://localhost:3000/orderfood', formData, {
+                const response = await axios.post('https://dailycious-mernstack-api.vercel.app/orderfood', formData, {
                     headers: {
                         'Content-Type': 'application/json'
                     }

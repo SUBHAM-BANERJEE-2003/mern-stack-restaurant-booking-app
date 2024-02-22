@@ -28,7 +28,7 @@ function BookForm() {
     if (username) {
       try {
         console.log('Booking:', formData);
-        const response = await axios.post('http://localhost:3000/booking', formData, {
+        const response = await axios.post('https://dailycious-mernstack-api.vercel.app/booking', formData, {
           headers: {
             'Content-Type': 'application/json'
           }

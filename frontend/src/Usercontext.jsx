@@ -1,5 +1,5 @@
-import React, { useEffect,createContext, useContext, useState } from 'react';
 import axios from 'axios';
+import React, { createContext, useContext, useEffect, useState } from 'react';
 const UserContext = createContext();
 
 export const useUserContext = () => {
@@ -14,7 +14,7 @@ export const UserProvider = ({ children }) => {
     const token = localStorage.getItem('token');
 
     if (token) {
-      axios.get('http://localhost:3000/getusername', {
+      axios.get('https://dailycious-mernstack-api.vercel.app/getusername', {
         withCredentials: true,
         headers: {
           'Authorization': `Bearer ${token}`, // Include the JWT token in the header
@@ -35,8 +35,8 @@ export const UserProvider = ({ children }) => {
           setUsername(null);
         });
     }
-    else{
-        setUsername(null);
+    else {
+      setUsername(null);
     }
   }, []);
 
