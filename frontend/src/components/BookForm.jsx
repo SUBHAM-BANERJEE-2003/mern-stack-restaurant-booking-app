@@ -1,94 +1,117 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import axios from 'axios';
+import { useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { useUserContext } from '../Usercontext';
 function BookForm() {
+  const navigate = useNavigate();
   const { username } = useUserContext();
-  const currentDate = new Date().toISOString().split('T')[0];
-  const [selectedDate, setSelectedDate] = useState(currentDate);
-  const [availableTimeSlots, setAvailableTimeSlots] = useState([
-    '2 PM', '3 PM', '4 PM', '5 PM', '6 PM', '7 PM', '8 PM', '9 PM', '10 PM', '11 PM'
-  ]);
+  const [bookingerr, setBookingerr] = useState(''); // to show booking error
+  const [formData, setFormData] = useState({
+    username: undefined,
+    Day: '',
+    Timeslot: '9:00 AM - 10:00 AM',
+    Datetime: new Date(),
+    Status: 'Pending'
+  });
 
-  const handleDateChange = (e) => {
-    const date = new Date(e.target.value);
-    const dayOfWeek = date.getDay(); // 0 (Sunday) to 6 (Saturday)
+  useEffect(() => {
+    // extract day from date, like monday, tuesday, etc
+    const date = new Date(formData.Datetime);
+    const day = date.toLocaleDateString('en-US', { weekday: 'long' });
+    setFormData({ ...formData, Day: day });
+  }, [formData.Datetime])
 
-    // Define your available time slots based on the day of the week
-    let newTimeSlots = [];
-
-    if (dayOfWeek >= 1 && dayOfWeek <= 5) { // Mon - Fri
-      newTimeSlots = ['2 PM', '3 PM', '4 PM', '5 PM', '6 PM', '7 PM', '8 PM', '9 PM', '10 PM'];
-    } else if (dayOfWeek === 6) { // Saturday
-      newTimeSlots = ['2 PM', '3 PM', '4 PM', '5 PM', '6 PM', '7 PM', '8 PM', '9 PM', '10 PM', '11 PM'];
-    } else if (dayOfWeek === 0) { // Sunday
-      newTimeSlots = ['2 PM', '3 PM', '4 PM', '5 PM', '6 PM', '7 PM', '8 PM', '9 PM'];
+  const handleBooking = async (e) => {
+    e.preventDefault();
+    formData.username = username;
+    console.log('Booking:', formData);
+    if (username) {
+      try {
+        console.log('Booking:', formData);
+        const response = await axios.post('http://localhost:3000/booking', formData, {
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        });
+        console.log(response);
+        navigate('/reservation');
+      } catch (error) {
+        console.error('Error booking:', error);
+        setBookingerr('Timeslot is already booked');
+      }
     }
-
-    setSelectedDate(date);
-    setAvailableTimeSlots(newTimeSlots);
-    const selectedDate = e.target.value;
-    const currentDate = new Date().toISOString().split('T')[0];
-
-    if (selectedDate >= currentDate) {
-      setSelectedDate(selectedDate);
-    } else {
-      alert('Please select a date in the future.');
-      setSelectedDate(currentDate);
+    else {
+      navigate('/login');
     }
-    console.log(selectedDate)
-  };
+  }
   return (
-    username ? (
-      <div className="min-h-screen flex items-center justify-center bg-gray-100">
-        <div className="bg-white p-8 rounded shadow-md w-full sm:w-96">
-          <h2 className="text-2xl font-semibold text-center text-gray-800 mb-6">Book your slot now</h2>
-          <form>
-            <div className="mb-4">
-              <label htmlFor="bookingdate" className="block text-gray-600 font-semibold">Booking date:<span className='text-red-600'>*</span></label>
-              <input
-                type="date"
-                id="bookingdate"
-                className="mt-1 p-2 w-full border rounded-md focus:ring focus:ring-blue-300"
-                placeholder="Enter booking date"
-                required
-                onInput={handleDateChange}
-              />
+
+    <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100">
+      <div className="bg-white p-8 rounded shadow-md w-full sm:w-96">
+        <h2 className="text-2xl font-semibold text-center text-gray-800 mb-6">Book your slot now</h2>
+        {bookingerr && (
+          <div className="mb-4 sm:w-96" style={{ width: "330px" }}>
+            <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+              <strong className="font-bold">Error! </strong>
+              <span className="block sm:inline">{bookingerr}</span>
             </div>
-            <div className="mb-4">
-              <label htmlFor="timeslot" className="block text-gray-600 font-semibold">Select your desired Timeslot<span className='text-red-600'>*</span></label>
-              <select id="timeslot" value={selectedDate} required onChange={handleDateChange}>
-                {availableTimeSlots.map((timeSlot, index) => (
-                  <option key={index} value={timeSlot}>
-                    {timeSlot}
-                  </option>
-                ))}
-              </select>
-            </div>
-            <div className="mb-4">
-              <button
-                type="submit"
-                className="bg-blue-500 text-white font-semibold py-2 px-4 rounded-md hover:bg-blue-600 transition duration-300"
-              >
-                Book Now
-              </button>
-              <h6>Note:</h6>
-              <ul>
-                <li>1) Check out the reservations page to check if that timeslot is open or not</li>
-                <li>2) In case you dont have an account, then register yourself</li>
-              </ul>
-            </div>
-          </form>
-        </div>
+          </div>
+        )}
+        <form onSubmit={handleBooking}>
+          <div className="mb-4">
+            <label htmlFor="bookingdate" className="block text-gray-600 font-semibold">Booking date:<span className='text-red-600'>*</span></label>
+            <input
+              type="date"
+              id="bookingdate"
+              className="mt-1 p-2 w-full border rounded-md focus:ring focus:ring-blue-300"
+              placeholder="Enter booking date"
+              value={formData.Datetime}
+              onChange={(e) => setFormData({ ...formData, Datetime: e.target.value })}
+              required
+            />
+          </div>
+          <div className="mb-4">
+            <label htmlFor="timeslot" className="block text-gray-600 font-semibold">Select your desired Timeslot<span className='text-red-600'>*</span></label>
+            <select
+              id="timeslot"
+              value={formData.Timeslot}
+              onChange={(e) => setFormData({ ...formData, Timeslot: e.target.value })}
+              required
+            >
+              <option value="9:00 AM - 10:00 AM">9:00 AM - 10:00 AM</option>
+              <option value="11:00 AM - 12:00 PM">11:00 AM - 12:00 PM</option>
+              <option value="1:00 PM - 2:00 PM">1:00 PM - 2:00 PM</option>
+              <option value="2:00 PM - 3:00 PM">2:00 PM - 3:00 PM</option>
+              <option value="3:00 PM - 4:00 PM">3:00 PM - 4:00 PM</option>
+              <option value="4:00 PM - 5:00 PM">4:00 PM - 5:00 PM</option>
+              <option value="5:00 PM - 6:00 PM">5:00 PM - 6:00 PM</option>
+              <option value="6:00 PM - 7:00 PM">6:00 PM - 7:00 PM</option>
+              <option value="7:00 PM - 8:00 PM">7:00 PM - 8:00 PM</option>
+              <option value="8:00 PM - 9:00 PM">8:00 PM - 9:00 PM</option>
+              <option value="9:00 PM - 10:00 PM">9:00 PM - 10:00 PM</option>
+              <option value="10:00 PM - 11:00 PM">10:00 PM - 11:00 PM</option>
+              <option value="11:00 PM - 12:00 AM">11:00 PM - 12:00 AM</option>
+              <option value="12:00 AM - 1:00 AM">12:00 AM - 1:00 AM</option>
+            </select>
+          </div>
+          <div className="mb-4">
+            <button
+              type="submit"
+              className="bg-blue-500 text-white font-semibold py-2 px-4 rounded-md hover:bg-blue-600 transition duration-300"
+            >
+              Book Now
+            </button>
+            <h6>Note:</h6>
+            <ul>
+              <li>1) Check out the reservations page to check if that timeslot is open or not </li>
+              <li><Link to="/reservation" className='text-blue-400 underline'>Click here to check reservations</Link></li>
+              <li>2) In case you dont have an account, then register yourself</li>
+            </ul>
+          </div>
+        </form>
       </div>
-    ) : (
-      <div className="min-h-screen flex items-center justify-center">
-        <Link to="/login">
-          <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full w-full">
-            Please Login to Continue
-          </button>
-        </Link>
-      </div>
-    )
+    </div>
+
   );
 }
 

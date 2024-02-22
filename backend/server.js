@@ -6,6 +6,7 @@ const cors = require('cors');
 const cookieParser = require("cookie-parser")
 const recordRoutes = require('./routes/registeruser.js');
 const Order = require('./db/schemas/Orders.js');
+const Booking = require('./db/schemas/Booking.js');
 require('dotenv').config();
 
 const corsOptions = {
@@ -66,6 +67,37 @@ app.post('/orderfood', async (req, res) => {
     res.status(500).json({ error: 'Internal server error' });
   }
 })
+
+app.get('/booking', async (req, res) => {
+  try {
+    const bookingData = await Booking.find({}, { _id: 0, __v: 0 });
+    res.json(bookingData);
+  } catch (err) {
+    console.error('Error fetching booking data:', err);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+})
+
+app.post('/booking', async (req, res) => {
+  const { username, Day, Timeslot, Datetime, Status } = req.body;
+  const booking = new Booking({
+    username,
+    Day,
+    Timeslot,
+    Datetime,
+    Status
+  });
+
+  await booking.save()
+    .then(() => {
+      res.status(200).json({ message: "Booking Successful" });
+    })
+    .catch((err) => {
+      console.error('Error placing order:', err);
+      res.status(500).json({ message: "Timeslot is already booked" });
+    });
+})
+
 app.use("/", recordRoutes);
 app.listen(3000, () => {
   console.log('Connected to PORT 3000...');

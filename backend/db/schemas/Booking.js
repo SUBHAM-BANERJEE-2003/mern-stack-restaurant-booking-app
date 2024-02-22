@@ -1,30 +1,20 @@
 const mongoose = require("mongoose");
 
 const bookingSchema = mongoose.Schema({
-    registration_id: {
-        type: Number,
-        required: true,
-        unique: true,
-    },
-    name: {
+    username: {
         type: String,
         required: true,
-        lowercase: true,
-        unique: true,
-        max: 25
     },
     Day: {
         type: String,
         required: true,
-        unique: true,
     },
     Timeslot: {
         type: String,
         required: true,
-        unique: true,
     },
     Datetime: {
-        type: Date,
+        type: String,
         required: true
     },
     Status: {
@@ -32,3 +22,7 @@ const bookingSchema = mongoose.Schema({
         required: true,
     },
 });
+
+bookingSchema.index({ Day: 1, Timeslot: 1 }, { unique: true }); // same day multiple timeslot not allowed
+
+module.exports = mongoose.model("Booking", bookingSchema);

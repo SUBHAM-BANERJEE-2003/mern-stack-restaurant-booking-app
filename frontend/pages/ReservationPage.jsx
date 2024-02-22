@@ -1,8 +1,23 @@
-import React from 'react';
-import Navbar from '../src/components/Navbar';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 import Footer from '../src/components/Footer';
+import Navbar from '../src/components/Navbar';
 
 function ReservationPage() {
+  const [reservations, setReservations] = useState([]);
+
+  useEffect(() => {
+    const fetchReservations = async () => {
+      try {
+        const response = await axios.get('http://localhost:3000/booking');
+        setReservations(response.data);
+      } catch (error) {
+        console.error('Error fetching reservations:', error);
+      }
+    };
+    fetchReservations();
+  }, []);
+
   return (
     <>
       <Navbar />
@@ -23,30 +38,16 @@ function ReservationPage() {
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td className="px-4 py-3">1</td>
-                    <td className="px-4 py-3">John Doe</td>
-                    <td className="px-4 py-3">Monday</td>
-                    <td className="px-4 py-3">2023-09-25</td>
-                    <td className="px-4 py-3">2 PM</td>
-                    <td className="px-4 py-3">Pending</td>
-                  </tr>
-                  <tr>
-                    <td className="px-4 py-3">2</td>
-                    <td className="px-4 py-3">John Cena</td>
-                    <td className="px-4 py-3">Tuesday</td>
-                    <td className="px-4 py-3">2023-09-26</td>
-                    <td className="px-4 py-3">2 PM</td>
-                    <td className="px-4 py-3">Pending</td>
-                  </tr>
-                  <tr>
-                    <td className="px-4 py-3">3</td>
-                    <td className="px-4 py-3">Seth Rollins</td>
-                    <td className="px-4 py-3">Wednesday</td>
-                    <td className="px-4 py-3">2023-09-27</td>
-                    <td className="px-4 py-3">2 PM</td>
-                    <td className="px-4 py-3">Pending</td>
-                  </tr>
+                  {reservations.map((reservation, index) => (
+                    <tr key={index}>
+                      <td className="px-4 py-3">{index + 1}</td>
+                      <td className="px-4 py-3">{reservation.username}</td>
+                      <td className="px-4 py-3">{reservation.Day}</td>
+                      <td className="px-4 py-3">{reservation.Datetime}</td>
+                      <td className="px-4 py-3">{reservation.Timeslot}</td>
+                      <td className="px-4 py-3">{reservation.Status}</td>
+                    </tr>
+                  ))}
                 </tbody>
               </table>
             </div>
