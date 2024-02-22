@@ -99,6 +99,3 @@ app.post('/booking', async (req, res) => {
 })
 
 app.use("/", recordRoutes);
-app.listen(3000, () => {
-  console.log('Connected to PORT 3000...');
-});
