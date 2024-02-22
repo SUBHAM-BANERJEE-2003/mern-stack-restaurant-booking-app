@@ -8,14 +8,14 @@ const ScrollButtons = () => {
     const scrollAmount = 100;
 
     return (
-        <div className="flex ml-32">
+        <div className="ml-0 sm:flex ml-32">
             <button
                 className="nav-btn mr-10"
                 onClick={() => {
                     const container = sliderRef.current;
                     container.scrollLeft -= scrollAmount;
                 }} >
-                <FaChevronLeft />
+                <FaChevronLeft className="hidden sm:" />
             </button>
             <div className="flex max-w-[1200px] overflow-scroll scroll-smooth transition-scroll duration-300 ease-in-out" ref={sliderRef}>
                 {
@@ -31,7 +31,7 @@ const ScrollButtons = () => {
                     container.scrollLeft += scrollAmount;
                 }}
             >
-                <FaChevronRight />
+                <FaChevronRight className="hidden sm:" />
             </button>
         </div >
     );

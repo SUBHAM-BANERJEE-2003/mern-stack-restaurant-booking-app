@@ -75,9 +75,9 @@ function OrderFood() {
 
     return <>
         <Navbar />
-        <div className="flex items-center justify-center" style={{ fontFamily: "Oxygen" }}>
-            <aside>
-                <img src={`/MenuItems/${menuData.imgpath}`} alt="pizza" style={{ width: '450px', height: "450px", margin: '50px', marginLeft: '-50px' }} />
+        <div className="flex flex-col items-center justify-center" style={{ fontFamily: "Oxygen" }}>
+            <aside className="text-center mb-4">
+                <img src={`/MenuItems/${menuData.imgpath}`} alt="pizza" style={{ width: '250px', height: "250px" }} />
                 <p className="ml-12 text-3xl font-bold text-blue-500">{menuData.foodname}</p>
                 <p>{menuData.description}</p>
                 <p><b>Price:</b>

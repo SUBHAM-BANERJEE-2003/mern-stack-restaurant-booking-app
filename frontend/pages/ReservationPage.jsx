@@ -21,7 +21,6 @@ function ReservationPage() {
   return (
     <>
       <Navbar />
-      <h1 className='mt-5 flex items-center justify-center text-blue-700' style={{ fontSize: '25px', fontFamily: 'Oxygen', fontWeight: 'bolder' }}>Check all reservations</h1>
       <div className="min-h-screen bg-gray-100 py-5" style={{ fontFamily: 'Oxygen', fontWeight: 'bold' }}>
         <div className="w-full max-w-7xl mx-auto px-4 mt-10">
           <div className="w-full mb-8 overflow-hidden rounded-lg shadow-lg">
