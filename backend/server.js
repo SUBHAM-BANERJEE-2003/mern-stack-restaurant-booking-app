@@ -8,12 +8,7 @@ const recordRoutes = require('./routes/registeruser.js');
 const Order = require('./db/schemas/Orders.js');
 const Booking = require('./db/schemas/Booking.js');
 require('dotenv').config();
-
-const corsOptions = {
-  origin: 'https://dailycious-app.vercel.app/',
-  credentials: true,
-};
-app.use(cors(corsOptions));
+app.use(cors());
 app.use(express.json());
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: false }));
