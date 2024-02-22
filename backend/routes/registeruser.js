@@ -5,6 +5,7 @@ const recordRoutes = express.Router();
 const { generateToken, verifyToken } = require('../utils/jwt');
 const bcrypt = require('bcryptjs');
 recordRoutes.route("/register").post(async function (req, res) {
+  res.header('Access-Control-Allow-Credentials', true);
   const username = req.body.username;
   const email = req.body.email;
   const password = req.body.password;
@@ -28,6 +29,7 @@ recordRoutes.get('/loginserver', (req, res) => {
 });
 
 recordRoutes.route("/loginserver").post(async function (req, res) {
+  res.header('Access-Control-Allow-Credentials', true);
   const { email, password } = req.body;
   // Verify email and password here (You will need to implement this)
   const user = await authenticateUser(req, email, password);
